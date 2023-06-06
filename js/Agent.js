@@ -12,18 +12,18 @@ console.log(logedUserValorantJSON)
 async function pedirAPI() {
     const response = await fetch ("https://valorant-api.com/v1/agents")
     const json = await response.json()
-    const data = json.data 
+    const data = json.data
 
-    crearClase(data)    
+    crearClase(data)
 }
 
 
 
 function crearClase(data) {
-    var listAgents = []   
+    var listAgents = []
     for (let i = 0; i < data.length; i++) {
         if (i != 8 ) {
-        const element = data[i]; 
+        const element = data[i];
 
         var newAgent = new Character (element.uuid, element.displayName, element.description, element.fullPortrait, element.displayIcon, element.role.displayName, element.role.displayIcon, element.abilities[0].displayName, element.abilities[0].description, element.abilities[0].displayIcon, element.abilities[1].displayName, element.abilities[1].description, element.abilities[1].displayIcon, element.abilities[2].displayName, element.abilities[2].description, element.abilities[2].displayIcon, element.abilities[3].displayName, element.abilities[3].description, element.abilities[3].displayIcon)
         listAgents.push(newAgent)
@@ -32,6 +32,7 @@ function crearClase(data) {
     createFavorites(logedUserValorantJSON.favorites, listAgents)
     window.listaAgentesGlobal = listAgents;
 }
+
 
 
 
@@ -52,17 +53,17 @@ function buscar() {
                     const favorite = logedUserValorantJSON.favorites[i];
                     if (element.uuid === favorite) {
                         indicator = 1
-                        containerAgents.innerHTML += element.toCardsFavorite() 
-                    }  
+                        containerAgents.innerHTML += element.toCardsFavorite()
+                    }
                 }
                 if (indicator === 0) {
                     containerAgents.innerHTML += element.toCards()
                 }
-                
-                
+
+
             }
         }
-        
+
     }
 
 function enviarADetalle(uuid) {
@@ -126,14 +127,14 @@ function createFavorites(favoriteList, listAgents) {
             const favorite = favoriteList[i];
             if (favorite === agent.uuid) {
                 indicator = 1
-                containerAgents.innerHTML += agent.toCardsFavorite() 
-            }  
+                containerAgents.innerHTML += agent.toCardsFavorite()
+            }
         }
         if (indicator === 0) {
             containerAgents.innerHTML += agent.toCards()
         }
-        
-        
+
+
     }
 }
 
